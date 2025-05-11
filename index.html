@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orçamento Pessoal - Wesley Fonseca</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/1170/1170627.png" />
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Estilo Customizado -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="bg-primary text-white text-center py-4">
+    <h1 class="fw-bold">Orçamento Pessoal Inteligente</h1>
+    <p class="lead">Controle financeiro simples, rápido e eficiente</p>
+  </header>
+
+  <main class="container my-5">
+    <!-- Formulário -->
+    <section class="card shadow-sm mb-4">
+      <div class="card-header bg-success text-white">Adicionar Transação</div>
+      <div class="card-body">
+        <form id="form-lancamento">
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label for="tipo" class="form-label">Tipo</label>
+              <select id="tipo" class="form-select">
+                <option value="receita">Receita</option>
+                <option value="despesa">Despesa</option>
+              </select>
+            </div>
+            <div class="col-md-5">
+              <label for="descricao" class="form-label">Descrição</label>
+              <input type="text" id="descricao" class="form-control" placeholder="Ex: Mercado, Uber, Salário" />
+            </div>
+            <div class="col-md-4">
+              <label for="valor" class="form-label">Valor (R$)</label>
+              <input type="number" id="valor" class="form-control" placeholder="0.00" step="0.01" />
+            </div>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-4 flex-wrap gap-2">
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-outline-success dropdown-toggle" data-bs-toggle="dropdown">
+                Exportar Dados
+              </button>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#" onclick="exportarExcel('xlsx')">Excel (.xlsx)</a></li>
+                <li><a class="dropdown-item" href="#" onclick="exportarExcel('csv')">CSV (.csv)</a></li>
+              </ul>
+            </div>
+            <input type="file" id="inputImportar" class="form-control w-auto" accept=".xlsx,.csv" onchange="importarArquivo(this)">
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Resumo -->
+    <section class="row text-center mb-4">
+      <div class="col-md-4">
+        <div class="card border-success">
+          <div class="card-body">
+            <h6 class="text-muted">Receitas</h6>
+            <p id="totalReceitas" class="fs-4 text-success">R$ 0,00</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card border-danger">
+          <div class="card-body">
+            <h6 class="text-muted">Despesas</h6>
+            <p id="totalDespesas" class="fs-4 text-danger">R$ 0,00</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div id="cardSaldo" class="card border">
+          <div class="card-body">
+            <h6 class="text-muted">Saldo Atual</h6>
+            <p id="saldoAtual" class="fs-4 fw-bold">R$ 0,00</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lista de Transações -->
+    <section class="card shadow-sm mb-4">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 class="card-title">Histórico de Transações <span id="badgeTotal" class="badge bg-secondary">0</span></h5>
+          <button class="btn btn-outline-danger btn-sm" onclick="limparTudo()">Limpar Tudo</button>
+        </div>
+        <ul id="listaTransacoes" class="list-group"></ul>
+      </div>
+    </section>
+
+    <!-- Gráficos -->
+    <section class="card shadow-sm mb-5">
+      <div class="card-body">
+        <h5 class="card-title">Gráficos de Análise</h5>
+        <div class="row">
+          <div class="col-md-6">
+            <canvas id="graficoPizza"></canvas>
+          </div>
+          <div class="col-md-6">
+            <canvas id="graficoBarra"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+<!-- Gráficos Estilo Power BI -->
+<section class="row mb-5">
+    <div class="col-md-6 col-lg-3 mb-3">
+      <div class="card shadow-sm">
+        <div class="card-header">📈 Saldo Diário</div>
+        <div class="card-body">
+          <canvas id="graficoLinha" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-6 col-lg-3 mb-3">
+      <div class="card shadow-sm">
+        <div class="card-header">📊 Despesas Mensais</div>
+        <div class="card-body">
+          <canvas id="graficoBarra" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Lista de Transações -->
+<section class="card shadow-sm mb-4">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="card-title">Histórico de Transações <span id="badgeTotal" class="badge bg-secondary">0</span></h5>
+        <button class="btn btn-outline-danger btn-sm" onclick="limparTudo()">Limpar Tudo</button>
+      </div>
+      <ul id="listaTransacoes" class="list-group">
+        <!-- Transações serão inseridas via JS -->
+      </ul>
+    </div>
+  </section>
+  
+    <div class="col-md-6 col-lg-3 mb-3">
+      <div class="card shadow-sm">
+        <div class="card-header">🍕 Categorias de Gastos</div>
+        <div class="card-body">
+          <canvas id="graficoPizza" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  
+    <div class="col-md-6 col-lg-3 mb-3">
+      <div class="card shadow-sm">
+        <div class="card-header">💵 Receita vs Despesa</div>
+        <div class="card-body">
+          <canvas id="graficoStacked" height="200"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <footer class="bg-dark text-white text-center py-3">
+    <p>Desenvolvido por <strong>Wesley Fonseca</strong> • Todos os direitos reservados © 2025</p>
+  </footer>
+
+  <!-- Scripts externos -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.5/xlsx.full.min.js"></script>
+
+  <!-- Script principal -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+body {
+    background-color: #f7f9fb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    scroll-behavior: smooth;
+  }
+  
+  /* Cabeçalho */
+  header {
+    background: linear-gradient(90deg, #007bff, #00c6ff);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
+  
+  header p.lead {
+    font-size: 1.2rem;
+    opacity: 0.9;
+  }
+  
+  .card {
+    border-radius: 12px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.01);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+  
+  .btn {
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .btn:hover {
+    transform: scale(1.03);
+    opacity: 0.95;
+  }
+  
+  input[type="file"] {
+    cursor: pointer;
+  }
+  
+  #saldoAtual {
+    transition: color 0.3s ease;
+  }
+  
+  #cardSaldo.border-success .card-body {
+    background-color: #e6fff2;
+  }
+  
+  #cardSaldo.border-danger .card-body {
+    background-color: #ffe6e6;
+  }
+  
+  /* Badge de total */
+  #badgeTotal {
+    font-size: 0.85rem;
+    padding: 5px 10px;
+    background-color: #6c757d;
+    color: #fff;
+    border-radius: 20px;
+  }
+  
+  /* Gráficos responsivos */
+  canvas {
+    max-width: 100%;
+    height: auto !important;
+  }
+  
+  /* Lista de transações */
+  .list-group-item {
+    border: none;
+    border-bottom: 1px solid #dee2e6;
+    font-weight: 500;
+  }
+  
+  .list-group-item:last-child {
+    border-bottom: none;
+  }
+  
+  /* Rodapé */
+  footer {
+    font-size: 0.9rem;
+    background: linear-gradient(90deg, #212529, #343a40);
+  }
+  
+  /* Responsividade extra */
+  @media (max-width: 768px) {
+    .row.g-3 .col-md-3,
+    .row.g-3 .col-md-5,
+    .row.g-3 .col-md-4 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  
+    header h1 {
+      font-size: 2rem;
+    }
+  
+    header p.lead {
+      font-size: 1rem;
+    }
+  }
+  /* Estilo para o Dashboard Power BI */
+.card {
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    font-weight: bold;
+    background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+    color: white;
+    border-bottom: 2px solid #eee;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  .card-body {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 0 0 12px 12px;
+  }
+  
+  canvas {
+    max-width: 100%;
+    height: auto !important;
+  }
+  
+  @media (max-width: 768px) {
+    .card-header {
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Espaçamento entre os dashboards */
+  .row.g-4 > .col-md-6 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  h5.card-title.text-center {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2rem;
+    font-size: 1.3rem;
+  } 
+  /* Estilo para o Dashboard Power BI */
+.card {
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-header {
+    font-weight: bold;
+    background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%);
+    color: white;
+    border-bottom: 2px solid #eee;
+    font-size: 1rem;
+    text-align: center;
+  }
+  
+  .card-body {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 0 0 12px 12px;
+  }
+  
+  canvas {
+    max-width: 100%;
+    height: auto !important;
+  }
+  
+  @media (max-width: 768px) {
+    .card-header {
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Espaçamento entre os dashboards */
+  .row.g-4 > .col-md-6 {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  
+  h5.card-title.text-center {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 2rem;
+    font-size: 1.3rem;
+  }
+  
+  /* Botão de excluir transação */
+  .delete-btn {
+    background: transparent;
+    border: none;
+    color: #dc3545;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding-left: 10px;
+    transition: transform 0.2s ease;
+  }
+  
+  .delete-btn:hover {
+    transform: scale(1.2);
+  } 
+  
+  /* Alinhamento no histórico */
+  .transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .transaction-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
